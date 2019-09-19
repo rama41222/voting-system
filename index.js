@@ -3,6 +3,7 @@
 
 const processVotes = (function processVotes() {
   
+  const voteStore = {};
   let instance;
   
   function init() {
@@ -16,8 +17,6 @@ const processVotes = (function processVotes() {
       moscow: 0,
       budapest: 0
     };
-  
-    const voteStore = {};
     
     function vote(time, city) {
       if(!candidates[city]) {
@@ -25,7 +24,6 @@ const processVotes = (function processVotes() {
       } else {
         candidates[city] += 1;
       }
-      
       voteStore[time] = city;
     }
     
@@ -44,6 +42,7 @@ const processVotes = (function processVotes() {
       return instance;
     }
   }
+  
 })();
 
 const voter = processVotes.getInstance();
@@ -77,9 +76,9 @@ setTimeout(function () {
   voter.vote(Date.now(), "budapest");
 },600);
 
-
 // get top voted city within time range. 1568919047094 to Date.now()-500
-function getCitiesWithinTimeRange(){
+
+function getCitiesWithinTimeRange() {
   const votersList = [];
   const topCities = {};
   const top = Date.now()-300;
@@ -98,17 +97,14 @@ function getCitiesWithinTimeRange(){
       topCities[city] += 1;
     }
   });
+  
   return topCities;
 }
 
 // get top n cities within time range. 1568919047094 to Date.now()-500
 setTimeout(function () {
+  
   const topCities = getCitiesWithinTimeRange();
-  
-  const sortedCitites = Object
-    .keys(topCities)
-    .map(v => ({a:topCities[v], b:v}))
-    .sort((b, a) => (a.a - b.a));
-  
+  const sortedCitites = Object.keys(topCities).map(v => ({a:topCities[v], b:v})).sort((b, a) => (a.a - b.a));
   console.log(sortedCitites);
 }, 1000);
