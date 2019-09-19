@@ -103,7 +103,6 @@ function getCitiesWithinTimeRange() {
 
 // get top n cities within time range. 1568919047094 to Date.now()-500
 setTimeout(function () {
-  
   const topCities = getCitiesWithinTimeRange();
   const sortedCitites = Object.keys(topCities).map(v => ({a:topCities[v], b:v})).sort((b, a) => (a.a - b.a));
   console.log(sortedCitites);
