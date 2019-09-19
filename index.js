@@ -1,3 +1,6 @@
+// Complexity = O(n)
+// Assumes that votes are being casted sequentially
+
 const processVotes = (function processVotes() {
   
   let instance;
@@ -23,13 +26,7 @@ const processVotes = (function processVotes() {
         candidates[city] += 1;
       }
       
-      if(!voteStore[time]) {
-        voteStore[time] = [];
-        voteStore[time].push(city);
-        
-      } else {
-        voteStore[time].push(city);
-      }
+      voteStore[time] = city;
     }
     
     return {
@@ -53,14 +50,17 @@ const voter = processVotes.getInstance();
 
 setTimeout(function () {
   voter.vote(Date.now(), "goa");
-  voter.vote(Date.now(), "budapest");
 },100);
+
+setTimeout(function () {
+  voter.vote(Date.now(), "colombo");
+  
+},150);
 setTimeout(function () {
   voter.vote(Date.now(), "colombo");
   
 },200);
 setTimeout(function () {
-  voter.vote(Date.now(), "goa");
   voter.vote(Date.now(), "colombo");
   
 },300);
@@ -70,15 +70,45 @@ setTimeout(function () {
 },400);
 setTimeout(function () {
   voter.vote(Date.now(), "mumbai");
-  voter.vote(Date.now(), "colombo");
   
 },500);
 
 setTimeout(function () {
-  console.log(voter.getVoteStore);
-  console.log(voter.getCandidates);
+  voter.vote(Date.now(), "budapest");
+},600);
+
+
+// get top voted city within time range. 1568919047094 to Date.now()-500
+function getCitiesWithinTimeRange(){
+  const votersList = [];
+  const topCities = {};
+  const top = Date.now()-300;
+  const bottom = 1568919436311;
+  
+  Object.keys(voter.getVoteStore).forEach((value, key) => {
+    if(parseInt(value) < top && parseInt(value) > bottom) {
+      votersList.push(voter.getVoteStore[value]);
+    }
+  });
+  
+  votersList.forEach( (city) => {
+    if(!topCities[city]) {
+      topCities[city] = 1;
+    } else {
+      topCities[city] += 1;
+    }
+  });
+  return topCities;
+}
+
+// get top n cities within time range. 1568919047094 to Date.now()-500
+setTimeout(function () {
+  const topCities = getCitiesWithinTimeRange();
+  
+  const sortedCitites = Object
+    .keys(topCities)
+    .map(v => ({a:topCities[v], b:v}))
+    .sort((b, a) => (a.a - b.a));
+  
+  console.log(sortedCitites);
 }, 1000);
-
-
-// get top 3 voters within time range. 1568919047094 to Date.now()-500
-
