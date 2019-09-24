@@ -1,7 +1,7 @@
 Voting System
 -------------
 
-* This is just a sample application to simulate sequential voting.
+* This is just a sample application to simulate sequential voting. The challenge is to extract top voters in a given timeframe.
 
 #### Improvements
 
