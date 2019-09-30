@@ -28,7 +28,7 @@ cli.on('line', (input) => {
       console.log(voter.getVoteStore);
       break;
     case 'top':
-      console.log(voter.top(values[0], values[1]));
+      console.log(voter.top(values[0], values[1], values[2]));
       break;
     case 'exit':
       console.log('Bye');

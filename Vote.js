@@ -63,7 +63,7 @@ const processVotes = (function processVotes() {
       return topCities;
     }
     
-    function getTop(start, end) {
+    function getTop(start, end, limit) {
       let topCities;
 
       if(timeRegExp.test(start) && timeRegExp.test(end)) {
@@ -73,7 +73,7 @@ const processVotes = (function processVotes() {
 
       return  Object.keys(topCities).map((v) => ({votes: topCities[v], city: v}))
         .sort((first, second) => (second.votes - first.votes))
-        .map(v => (v.city));
+        .map(v => (v.city)).slice(0, limit);
     }
     
     return {
