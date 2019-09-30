@@ -45,11 +45,11 @@ const processVotes = (function processVotes() {
       return topCities;
     }
     
-    function getTop(start, end) {
+    function getTop(start, end, limit) {
       const topCities = getCitiesWithinTimeRange(start, end);
       return  Object.keys(topCities).map((v, index) => ({votes: topCities[v], city: v}))
         .sort((first, second) => (second.votes - first.votes))
-        .map((v,i) => (v.city));
+        .map((v,i) => (v.city)).slice(0, limit);
     }
     
     return {
