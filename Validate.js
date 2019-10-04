@@ -18,21 +18,6 @@ let candidates = [
 
 ];
 
-function sortCandidatesVote(){
-  let result = candidates.sort((a,b) => (a.votes > b.votes) ? 1 : ((b.votes > a.votes) ? -1 : 0)); 
-  console.log(result);
-}
-
-function checkEligibility(){ 
-  result.forEach(element,i => {
-    if(element[i].votes > eligibleLimit){
-      return true;
-    }else{
-      return false;
-    }
-  });
-}
-
 
 const cli = readline.createInterface({
     input: process.stdin,
