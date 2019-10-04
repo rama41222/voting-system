@@ -1,5 +1,7 @@
 
 const readline = require('readline');
+const eligibleLimit = 23500;
+let eligibility; //boolean
 //sample data
 let candidates = [
   { name: "delhi",
@@ -12,6 +14,8 @@ let candidates = [
     votes: 50000
   } 
 
+
+
 ];
 
 function sortCandidatesVote(){
@@ -19,7 +23,15 @@ function sortCandidatesVote(){
   console.log(result);
 }
 
-
+function checkEligibility(){ 
+  result.forEach(element,i => {
+    if(element[i].votes > eligibleLimit){
+      return true;
+    }else{
+      return false;
+    }
+  });
+}
 
 
 const cli = readline.createInterface({
