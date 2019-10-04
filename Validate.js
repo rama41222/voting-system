@@ -1,5 +1,26 @@
 
 const readline = require('readline');
+//sample data
+let candidates = [
+  { name: "delhi",
+    votes: 30000
+  }, 
+  {name: "namemumbai",
+    votes: 40000
+  }, 
+  {name: "panchbi",
+    votes: 50000
+  } 
+
+];
+
+function sortCandidatesVote(){
+  let result = candidates.sort((a,b) => (a.votes > b.votes) ? 1 : ((b.votes > a.votes) ? -1 : 0)); 
+  console.log(result);
+}
+
+
+
 
 const cli = readline.createInterface({
     input: process.stdin,
