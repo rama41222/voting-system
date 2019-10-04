@@ -20,6 +20,16 @@ function sortCandidatesVote(){
   console.log(result);
 }
 
+function checkEligibility(){ 
+  result.forEach(element,i => {
+    if(element[i].votes > eligibleLimit){
+      return true;
+    }else{
+      return false;
+    }
+  });
+}
+
 
 const cli = readline.createInterface({
     input: process.stdin,
