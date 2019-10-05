@@ -2,15 +2,22 @@
 const readline = require('readline');
 const eligibleLimit = 23500;
 let eligibility; //boolean
+
 //sample data
 let candidates = [
-  { name: "delhi",
+  { 
+    id:0,
+    name: "delhi",
     votes: 30000
   }, 
-  {name: "namemumbai",
+  {
+    id:1,
+    name: "namemumbai",
     votes: 40000
   }, 
-  {name: "panchbi",
+  {
+    id:2,
+    name: "panchbi",
     votes: 50000
   } 
 ];
@@ -28,6 +35,19 @@ function checkEligibility(){
       return false;
     }
   });
+}
+
+function addVote(vote){
+  let objIndex;
+  if(vote == "delhi"){
+    objIndex = myArray.findIndex((obj => obj.id == 0)); 
+  }else if(vote == "delhi"){
+    objIndex = myArray.findIndex((obj => obj.id == 1)); 
+  }else if(vote == "delhi"){
+    objIndex = myArray.findIndex((obj => obj.id == 2));
+  }
+
+  myArray[objIndex].votes++; 
 }
 
 function checkHighestVotes(result){
