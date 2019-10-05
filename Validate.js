@@ -17,7 +17,7 @@ let candidates = [
 
 function sortCandidatesVote(){
   let result = candidates.sort((a,b) => (a.votes > b.votes) ? 1 : ((b.votes > a.votes) ? -1 : 0)); 
-  console.log(result);
+  return result;
 }
 
 function checkEligibility(){ 
@@ -30,6 +30,10 @@ function checkEligibility(){
   });
 }
 
+function checkHighestVotes(result){
+  //sorted desending order array give as a result
+  return highestVote = result[0].name;
+}
 
 const cli = readline.createInterface({
     input: process.stdin,
