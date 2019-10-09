@@ -20,7 +20,6 @@ cli.on('line', (input) => {
   else {
     switch (command) {
       case 'vote':
-        if (typeof values[0] !== 'string') console.log('Invalid input. Type expected: <string>.')
         if (!validator.validateCities(values[0])) console.log('Please enter a valid city.')
         else voter.vote(Date.now(), values[0]);
         break;
@@ -28,21 +27,23 @@ cli.on('line', (input) => {
         console.log(voter.getCandidates);
         break;
       case 'between':
-        if (!validator.validNumbers(values[0], values[1])) console.log('Invalid input. Please enter a valid interval. Type expected: <Integer>');  
+        if(values.length != 2) console.log('Not enough input. Example: between 5 10');
+        else if (!validator.validNumbers(values[0], values[1])) console.log('Invalid input. Please enter a valid interval. Type expected: <Int>');  
         else console.log(voter.getCitiesWithinTimeRange(values[0], values[1]));
         break;
       case 'db':
         console.log(voter.getVoteStore);
         break;
       case 'top':
-        if (!validator.validNumbers(values[0], values[1])) console.log('Invalid input. Please enter a valid interval. Type expected: <Integer>');  
+        if(values.length != 2) console.log('Not enough input. Example: top 5 10');
+        else if (!validator.validNumbers(values[0], values[1])) console.log('Invalid input. Please enter a valid interval. Type expected: <Int>');  
         else console.log(voter.top(values[0], values[1]));
         break;
       case 'exit':
         console.log('Bye');
         return process.exit(1);
       default:
-        console.log('Please enter a valid input. Accepted values: [ "vote", "votes", "between", "db", "top" ]');
+        console.log('Please enter a valid command. Accepted values: [ "vote", "votes", "between", "db", "top", "exit"]');
     }
   }
 });

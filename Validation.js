@@ -12,12 +12,14 @@ const validationService = (function validationService() {
             'budapest'
         ];
 
+        const excludedCommands = ['votes', 'db', 'exit'];
+
         function validateCities(city) {
             return availableCities.includes(city);
         }
-
+        
         function isInvalidInput(command, values) {
-            return (!values && command !=  'votes');
+            return !(values || excludedCommands.includes(command));
         }
 
         function isString(value) {
