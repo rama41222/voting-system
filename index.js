@@ -35,9 +35,9 @@ cli.on('line', (input) => {
         console.log(voter.getVoteStore);
         break;
       case 'top':
-        if(values.length != 2) console.log('Not enough input. Please enter start, end and limit values. Example: top 5 10 2');
+        if(values.length != 3) console.log('Not enough input. Please enter start, end and limit values. Example: top 5 10 2');
         else if (!values.every(validator.validNumber)) console.log('Invalid input. Please enter a valid interval. Type expected: <Int>');  
-        else console.log(voter.top(values[0], values[1]));
+        else console.log(voter.top(values[0], values[1], values[2]));
         break;
       case 'exit':
         console.log('Bye');
