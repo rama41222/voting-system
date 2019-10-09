@@ -28,7 +28,7 @@ cli.on('line', (input) => {
         break;
       case 'between':
         if(values.length != 2) console.log('Not enough input. Please enter start and end values. Example: between 5 10');
-        else if (!validator.validNumbers(values[0], values[1])) console.log('Invalid input. Please enter a valid interval. Type expected: <Int>');  
+        else if (!values.every(validator.validNumber)) console.log('Invalid input. Please enter a valid interval. Type expected: <Int>');  
         else console.log(voter.getCitiesWithinTimeRange(values[0], values[1]));
         break;
       case 'db':
@@ -36,7 +36,7 @@ cli.on('line', (input) => {
         break;
       case 'top':
         if(values.length != 2) console.log('Not enough input. Please enter start, end and limit values. Example: top 5 10 2');
-        else if (!validator.validNumbers(values[0], values[1])) console.log('Invalid input. Please enter a valid interval. Type expected: <Int>');  
+        else if (!values.every(validator.validNumber)) console.log('Invalid input. Please enter a valid interval. Type expected: <Int>');  
         else console.log(voter.top(values[0], values[1]));
         break;
       case 'exit':

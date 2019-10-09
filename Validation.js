@@ -26,15 +26,15 @@ const validationService = (function validationService() {
             return typeof value === 'string';
         }
 
-        function validNumbers(start, end) {
-            return parseInt(start) && parseInt(end);
+        function validNumber(value) {
+            return parseInt(value);
         }
 
         return {
             validateCities: validateCities,
             isInvalidInput: isInvalidInput,
             isString: isString,
-            validNumbers: validNumbers
+            validNumber: validNumber
           }
     }
 
