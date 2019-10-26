@@ -5,16 +5,16 @@ const processVotes = require('./Vote');
 const validationService = require('./Validation');
 const voter = processVotes.getInstance();
 const validator = validationService.getInstance();
+const fs = require('fs');
 
 const cli = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-cli.on('line', (input) => {
-  const formattedInput = input.trim().split(' ');
-  const command = formattedInput[0];
-  const values = formattedInput.splice(1, formattedInput.length -1);
+function processInput(input) {
+  const command = input[0];
+  const values = input.splice(1, input.length -1);
 
   if(validator.isInvalidInput(command, values)) console.log('Not enough input.')
   else {
@@ -43,9 +43,32 @@ cli.on('line', (input) => {
         console.log('Bye');
         return process.exit(1);
       default:
+        console.log('Invalid command: ', command);
         console.log('Please enter a valid command. Accepted values: [ "vote", "votes", "between", "db", "top", "exit"]');
     }
   }
-});
+}
+
+if (process.argv.length > 2) {
+  fs.readFile(process.argv[2], 'utf8', function (err, data) {
+    if(err && err.code === 'ENOENT') { 
+      console.log("Input file does not exist."); 
+      process.exit();
+    }
+    else if(err){
+      throw err;
+    }
+    else {
+      var dataArray = data.split(/\r?\n/);
+      dataArray.filter(row => row.trim()).forEach(row => processInput(row.split(',')));
+    }
+  });
+} else {
+  console.log('Update: Inputs can be provided through a CSV file. Example: `node index.js <filepath>`');
+  cli.on('line', (input) => {
+    const formattedInput = input.trim().split(' ');
+    processInput(formattedInput);
+  });
+}
 
 
